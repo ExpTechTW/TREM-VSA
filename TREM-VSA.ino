@@ -6,6 +6,8 @@
  * Discord 群組 => https://exptech.com.tw/f?v=discord
  **/
 
+// version => 1.0.0
+
 #include <Servo.h> //伺服馬達 庫
 #include <ArduinoJson.h> // Json 庫
 #include <HTTPClient.h> // HTTP 庫
