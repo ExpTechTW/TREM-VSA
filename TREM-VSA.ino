@@ -6,7 +6,7 @@
    Discord 群組 => https://exptech.com.tw/f?v=discord
  **/
 
-// >>> version 1.1.0 <<<
+// >>> version 1.1.1 <<<
 
 #include <Servo.h> //伺服馬達 庫
 #include <ArduinoJson.h> // Json 庫
@@ -42,7 +42,7 @@ void loop() {
   if (httpResponseCode == 200) {
     deserializeJson(JSON, http.getString()); // Json 反序列化
     for (int i = 0; i < JSON["length"].as<float>(); i++) { // 控制 伺服馬達
-      myservo.write(90 + JSON["PGA"][i].as<float>()*enlarge); // >>> 取的軸向 ( X、Y、Z、PGA ) <<<
+      myservo.write(90 + JSON["Z"][i].as<float>()*enlarge); // >>> 取的軸向 ( X、Y、Z、PGA ) <<<
       delay(25); // 原始數據為 40Hz 故此處 delay 25ms
     }
   }
