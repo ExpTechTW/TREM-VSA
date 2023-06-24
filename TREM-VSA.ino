@@ -18,8 +18,8 @@ Servo myservo;                  // 初始化 伺服馬達
 const char* ssid = "ASUS_A8";                     // Wi-Fi SSID
 const char* password = "koala_3249";              // Wi-Fi Password
 String station = "H-979-11336952-11";             // 欲使用之測站 UUID
-String key = "9b2db182d6a7603c7152d46d8d633dba";  // 金鑰
-int enlarge = 1000;                                 // H 版取 1000 L 取 1
+String key = "45c3807ddfb55e774cb7699e78fc9ac";  // 金鑰
+int enlarge = 1000;                               // H 版取 1000 L 取 1
 
 float angle(float a) {
   if (a > 115) return 115;
@@ -49,10 +49,10 @@ void loop() {
   int httpResponseCode = http.GET();                                                                              // 發起 HTTP GET 請求
   if (httpResponseCode == 200) {
     JSON.clear();
-    deserializeJson(JSON, http.getString());                          // Json 反序列化
-    for (int i = 0; i < JSON["length"].as<float>(); i++) {            // 控制 伺服馬達
-      myservo.write(angle(90 + JSON["Z"][i].as<float>() * enlarge));  // >>> 取的軸向 ( X、Y、Z、PGA ) <<<
-      delay(50);                                                      // 原始數據為 20Hz 故此處 delay 50ms
+    deserializeJson(JSON, http.getString());                            // Json 反序列化
+    for (int i = 0; i < JSON["length"].as<float>(); i++) {              // 控制 伺服馬達
+      myservo.write(angle(90 + (JSON["Z"][i].as<float>() * enlarge)));  // >>> 取的軸向 ( X、Y、Z、PGA ) <<<
+      delay(45);  // 原始數據為 20Hz 故此處 delay 50ms
     }
   }
   if (httpResponseCode == -1) ESP.restart();  // 例外情況
